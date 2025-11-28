@@ -1,0 +1,283 @@
+/* --- ESTILOS GENERALES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+/* --- FONDO A PANTALLA COMPLETA --- */
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    background-color: #000000; /* Fondo de seguridad */
+    /* background-image: url('imgs/guitarrica.jpg'); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 3s ease-in-out; 
+    filter: brightness(0.6); 
+/*    filter: brightness(0.4) contrast(1.1); */
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.container {
+    width: 100%;
+    max-width: 680px;
+    padding: 40px 20px;
+    text-align: center;
+    z-index: 1;
+    animation: fadeIn 1s ease-out;
+}
+
+/* --- PERFIL --- */
+.profile-pic {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    /* object-fit: cover; */
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background-image: url('imgs/cara.jpg');
+    background-size: cover;
+    display: inline-block;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+p.subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 32px;
+    font-weight: 400;
+}
+
+/* --- BOTONES / ENLACES --- */
+.link-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* --- BOTONES / ENLACES --- */
+
+
+.link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+    /* --- CAMBIO: CRISTAL DESDE EL PRINCIPIO --- */
+    /* Fondo semitransparente constante */
+    background-color: rgba(255, 255, 255, 0.8); 
+    /* Desenfoque constante */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Borde sutil para definir el botón */
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    /* Texto blanco para mejor contraste sobre fondo oscuro */
+    color: #000000; 
+    
+    padding: 18px 20px;
+    border-radius: 25px; /* Empezamos redondos */
+    font-weight: 600;
+    font-size: 15px;
+    
+    /* --- LA CLAVE DE LA SUAVIDAD --- */
+    /* Animamos también el cambio de borde (border-radius) */
+    transition: transform 0.2s, background-color 0.2s, border-radius 0.2s ease;
+    
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Sombra al texto para que se lea bien */
+}
+
+/* Animaciones Botones */
+.link-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.02); 
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+
+}
+
+.link-btn:active {
+    /* transform: scale(0.98); */
+    opacity: 0.9;
+}
+
+/* Estilos base para el icono dentro del botón */
+.btn-icon {
+    position: absolute; /*para poder alinearlo a la izda */
+    left: 20px; /* Misma distancia que el padding del botón para que se vea simétrico */
+    width: 40px; /* Tamaño del círculo del icono */
+    height: 40px;
+    border-radius: 50%; /* Lo hace circular */
+    margin-right: 12px; /* Espacio entre el icono y el texto */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Un pequeño borde blanco para destacar */
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+    /* Fondo de respaldo por si no carga la imagen */
+    background-color: #eee; 
+}
+
+/* Imágenes específicas para cada botón */
+.btn-icon.erasmus {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png');
+}
+
+.btn-icon.teacher {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1024px-YouTube_full-color_icon_%282017%29.svg.png');
+}
+
+.btn-icon.hobbies {
+    background-image: url('https://www.iconfinder.com/icons/7309628/beatport_icon'); /* Icono de Beatport (buscar uno mejor) */
+    background-color: #00d283; /* Color si no hay imagen */
+}
+
+.btn-icon.fn1    {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1024px-YouTube_full-color_icon_%282017%29.svg.png');
+}
+
+.btn-icon.contact {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/3588/3588383.png'); /* Icono de email/contacto */
+    background-color: #f0f0f0;
+}
+
+/* --- REDES SOCIALES --- */
+.social-icons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icons a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    transition: transform 0.2s;
+    opacity: 0.8;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+/* --- ANIMACIÓN ENTRADA --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ESTILOS PARA EL ACORDEÓN (DESPLEGABLES) --- */
+
+.expandable-wrapper {
+    width: 100%;
+    /* margin-bottom: 16px; */
+}
+
+/* Ajuste para que el botón dentro del wrapper no tenga margen inferior propio */
+.expandable-wrapper .link-btn {
+    /* margin-bottom: 0; */
+    cursor: pointer;
+    justify-content: space-between; /* Separa texto (centro) y flecha (derecha) */
+    z-index: 2; /* Para que quede por encima del contenido al replegarse */
+}
+
+/* Cuando está ABIERTO, anulamos el escalado para que no "vibre" en la transformación */
+.expandable-wrapper.open .link-btn:hover {
+    transform: scale(1); /* Volvemos al tamaño original sin saltos */
+}
+
+/* Texto centrado forzado (necesario por el space-between de arriba) */
+.expandable-wrapper .btn-text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    pointer-events: none; /* Para que el clic pase a través */
+}
+
+/* La flechita rotatoria */
+.arrow-icon {
+    margin-left: auto; /* Empuja la flecha a la derecha del todo */
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* --- EL CONTENIDO OCULTO --- */
+.hidden-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1); /* Efecto suave */
+    opacity: 0; /* Opcional: para jugar con fade in */
+    transition: all 0.3s ease;
+    
+    /* Estilo GLASSMORPHISM */
+    background: rgba(255, 255, 255, 0.2); /* Blanco traslúcido */
+    backdrop-filter: blur(10px); /* Desenfoque del fondo */
+    -webkit-backdrop-filter: blur(10px); /* Para Safari */
+    
+    border-radius: 0 0 25px 25px; /* Redondeado solo abajo */
+    width: 100%;
+    margin-top: -2px; /* Pequeño solape para evitar líneas blancas */
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top: none; /* Quitamos borde arriba para fusionar */
+}
+
+.content-inner {
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: justify;
+    text-align-last: left; /* Importante: La última línea se queda a la izquierda */
+    color: #fff; /* Texto blanco para que se lea sobre el cristal oscuro/claro */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+
+/* --- ESTADOS ACTIVOS (CLASE "OPEN") --- */
+
+/* Cuando está abierto, quitamos el redondeo inferior del botón */
+.expandable-wrapper.open .link-btn {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: rgba(255, 255, 255, 0.8); /* Un poco más transparente al abrir */
+}
+
+/* Mostrar contenido */
+.expandable-wrapper.open .hidden-content {
+    max-height: 300px; /* Altura máxima suficiente para el texto */
+    opacity: 1;
+}
+
+/* Rotar flecha */
+.expandable-wrapper.open .arrow-icon {
+    transform: rotate(180deg);
+}

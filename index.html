@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edon Productions - Replica</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="background-image"></div>
+
+    <div class="container">
+        <div class="profile-pic"></div>
+
+        <h1>JuanRa Cayón Alcalde</h1>
+        <p class="subtitle">Iberian — like Saramago, not like the ham.</p>
+
+        <div class="link-group">
+            <!-- Botón de enlace simple, sin desplegable -->
+            <!-- <a href="#" class="link-btn">
+                <span class="btn-icon teacher"></span> <span>Computer Science Teacher</span>
+            </a> -->
+
+            <!-- Botón sin enlaces, con desplegable -->            
+            <div class="expandable-wrapper">
+                <div class="link-btn expand-trigger">
+                    <span class="btn-icon erasmus"></span>
+                    <span class="btn-text">Coordinador Erasmus+</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i> </div>
+                
+                <div class="hidden-content">
+                    <div class="content-inner">
+                        <p>Lemmë quantië tairië nu nánar, ar i hrestali pengwiëntë quentë nórenna ve ciryatin naucoiva. Min i-coimairë ilyë unnónë, Elda hlarëa mi macilcalma JavaScript. Mi yulmë lantaina ter i lúmissë, ettëa calmar vanwë lantalë or ilyë men.
+                            Mintë nórenna etelyë, er sánë túle: “Á hlarë, ar á yesta atarwa.” Ar nai, ilyë quendur nainië úmë rúcina: sin i nat lúmessë ná ambarnë.</p>
+                        </div>
+                </div>
+            </div>
+            <div class="expandable-wrapper">
+                <div class="link-btn expand-trigger">
+                    <span class="btn-icon teacher"></span>
+                    <span class="btn-text">Computer Science Teacher</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i> </div>
+                
+                <div class="hidden-content">
+                    <div class="content-inner">
+                        <p>Galletas cuánticas crujían bajo mis zapatillas mientras los pingüinos filósofos debatían sobre JavaScript. Entre cafés interdimensionales, alguien lanzó una tostadora al hiperespacio “para ver qué pasaba”. Al final, solo quedó una nota que decía: reinicia y prueba otra vez. Y sí, todos fingimos que era parte del plan.</p>
+                        </div>
+                </div>
+            </div>
+            <div class="expandable-wrapper">
+                <div class="link-btn expand-trigger">
+                    <span class="btn-icon hobbies"></span>
+                    <span class="btn-text">Hobbies</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i> </div>
+                
+                <div class="hidden-content">
+                    <div class="content-inner">
+                        <p>Drakarys vestri ēza vi perzys hen vala ēngos. Lentrot ñuqīr iksan, se bantis jemēla ēdruta vi rōva jelmior. Ānogar hāros, ēdruta kirine jēnks, vestri tolȳn ēza syt Valyrio jelmiot ēdruta. Skoriot zentyssy, iā morghūljos belmur, udra rūsīr hen prūmia.</p>
+                        </div>
+                </div>
+            </div>
+            <div class="expandable-wrapper">
+                <div class="link-btn expand-trigger">
+                    <span class="btn-icon fn1"></span>
+                    <span class="btn-text">IES Fuengirola Número 1+</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i> </div>
+                
+                <div class="hidden-content">
+                    <div class="content-inner">
+                        <p>Tha mi dol tro na glinn fhada far an tèid na ceòthan sìos mar òran sean. Air mullach nam beann, dh’èirich gaoth bheag mar fhuaim bhon chruinne-cè, agus sheinn i rium mar gum b’ e seann sgeul a bh’ ann. Anns an rathad seo, thig solas bog an latha, a’ dannsa ri sgàileanan na h-oidhche. Agus fhathast, tha an cridhe a’ leantainn an t-slighe mar gum b’ e ceòl tùsail na h-ùine.</p>
+                        </div>
+                </div>
+            </div>
+            <div class="expandable-wrapper">
+                <div class="link-btn expand-trigger">
+                    <span class="btn-icon contact"></span>
+                    <span class="btn-text">Contact Me</span>
+                    <i class="fas fa-chevron-down arrow-icon"></i> </div>
+                
+                <div class="hidden-content">
+                    <div class="content-inner">
+                        <p>Lû adhannen i-veth ammen, a ’lothren lírath nedh i-dhaer galadhon. Eredh ben ’waew lín sui glawar thinn, ar mellon nîn trenar i-veldhain tôl. Narn gwenn ui-vann, dan i-galad lín síla adh ‘wilith anor. Ae gin thâl, boe línad ne chened lû thent.</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+
+    <script>
+        const backgroundDiv = document.querySelector('.background-image');
+        const images = [
+            'imgs/bosque.jpg',
+            'imgs/guitarra.jpg',
+            'imgs/kandinsky.jpg',
+            'imgs/guitarrica.jpg',
+            'imgs/teatro.jpg',
+            'imgs/dorre2.jpg'
+        ];
+        let currentIndex = 0;
+
+        function changeBackground() {
+            // Obtener un índice aleatorio que no sea el actual
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * images.length);
+            } while (newIndex === currentIndex); // Asegurarse de que no repita la misma imagen
+
+            currentIndex = newIndex;
+            backgroundDiv.style.backgroundImage = `url('${images[currentIndex]}')`;
+        }
+
+        // Cambiar el fondo cada 8 segundos (5000 milisegundos)
+        setInterval(changeBackground, 5000); 
+
+        // Cargar el primer fondo al iniciar
+        changeBackground();
+
+        // --- LÓGICA DE LOS ACORDEONES ---
+    
+        // Seleccionamos todos los wrappers desplegables
+        const accordions = document.querySelectorAll('.expandable-wrapper');
+
+        accordions.forEach(acc => {
+            // Buscamos el botón dentro de cada wrapper
+            const trigger = acc.querySelector('.expand-trigger');
+
+            trigger.addEventListener('click', () => {
+                // 1. Comprobar si este ya está abierto
+                const isOpen = acc.classList.contains('open');
+
+                // 2. CERRAR TODOS los demás (Lógica de "Solo uno visible")
+                accordions.forEach(otherAcc => {
+                    otherAcc.classList.remove('open');
+                    // Reseteamos el max-height para asegurar la animación de cierre
+                    otherAcc.querySelector('.hidden-content').style.maxHeight = null;
+                });
+
+                // 3. Si el que clicamos NO estaba abierto, lo abrimos ahora
+                if (!isOpen) {
+                    acc.classList.add('open');
+                    const content = acc.querySelector('.hidden-content');
+                    // Usamos scrollHeight para que la altura sea exacta al contenido
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
