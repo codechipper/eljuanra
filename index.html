@@ -103,6 +103,36 @@
         </div>    
     </div>
 
+    <div class="share-modal-overlay" id="shareModal">
+        <div class="share-modal-content">
+            <h3>Compartir perfil</h3>
+            <button class="close-modal-btn" id="closeModalBtn">&times;</button>
+            
+            <div class="share-options-grid">
+                <a href="whatsapp://send?text=Check out this profile!: http://eljuanra.duckdns.org" data-action="share/whatsapp/share" class="share-option">
+                    <div class="share-icon-circle" style="background: #25D366;"><i class="fab fa-whatsapp"></i></div>
+                    <span>WhatsApp</span>
+                </a>
+                
+                <a href="https://t.me/share/url?url=http://eljuanra.duckdns.org&text=Check out this profile!" target="_blank" class="share-option">
+                    <div class="share-icon-circle" style="background: #0088cc;"><i class="fas fa-paper-plane"></i></div>
+                    <span>Telegram</span>
+                </a>
+    
+                <a href="mailto:?subject=Check out this profile!&body=Profile link: http://eljuanra.duckdns.org" class="share-option">
+                    <div class="share-icon-circle" style="background: #EA4335;"><i class="fas fa-envelope"></i></div>
+                    <span>Email</span>
+                </a>
+    
+                <div class="share-option" id="copyLinkOption" style="cursor: pointer;">
+                    <div class="share-icon-circle" style="background: #555;"><i class="fas fa-link"></i></div>
+                    <span>Copy</span>
+                </div>
+            </div>
+    
+            <div class="copy-feedback" id="copyFeedback">Link copied!</div>
+        </div>
+    </div>
 
     <script>
         const backgroundDiv = document.querySelector('.background-image');
@@ -161,6 +191,51 @@
                     content.style.maxHeight = content.scrollHeight + "px";
                 }
             });
+        });
+
+        // --- LÓGICA DE LA VENTANA MODAL DE COMPARTIR ---
+    
+        // Referencias
+        const shareBtn = document.getElementById('inlineShareBtn'); // El botón de arriba
+        const modalOverlay = document.getElementById('shareModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const copyLinkOption = document.getElementById('copyLinkOption');
+        const copyFeedback = document.getElementById('copyFeedback');
+
+        // 1. ABRIR MODAL
+        shareBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Evita que el enlace haga nada raro
+            modalOverlay.classList.add('active');
+        });
+
+        // 2. CERRAR MODAL (Botón X)
+        closeModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+        });
+
+        // 3. CERRAR AL HACER CLIC FUERA (En lo oscuro)
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
+        });
+
+        // 4. FUNCIÓN COPIAR ENLACE
+        copyLinkOption.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                
+                // Mostrar mensaje "Copiado"
+                copyFeedback.classList.add('show');
+                setTimeout(() => {
+                    copyFeedback.classList.remove('show');
+                    // Opcional: Cerrar modal automáticamente después de copiar
+                    // modalOverlay.classList.remove('active');
+                }, 2000);
+                
+            } catch (err) {
+                console.error('Error while copying', err);
+            }
         });
     </script>
 

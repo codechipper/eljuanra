@@ -297,3 +297,126 @@ p.subtitle {
     text-transform: uppercase; /* Mayúsculas para parecer una firma de marca */
     color: white;
 }
+
+
+/* --- MODAL DE COMPARTIR (Overlay Oscuro) --- */
+.share-modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
+    backdrop-filter: blur(5px); /* Desenfoque del fondo de la página */
+    z-index: 1000; /* Por encima de todo */
+    
+    /* Centrado Flex */
+    display: flex;
+    align-items: flex-end; /* En móvil sale desde abajo */
+    justify-content: center;
+    
+    /* Oculto por defecto */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Estado Visible */
+.share-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- LA CAJA DEL MODAL --- */
+.share-modal-content {
+    background: rgba(255, 255, 255, 0.95); /* Casi blanco sólido para leer bien */
+    width: 100%;
+    max-width: 500px; /* Que no sea gigante en PC */
+    border-radius: 20px 20px 0 0; /* Redondo solo arriba (estilo móvil) */
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    transform: translateY(100%); /* Empieza escondido abajo */
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    color: #000;
+}
+
+/* Cuando se activa, sube */
+.share-modal-overlay.active .share-modal-content {
+    transform: translateY(0);
+}
+
+/* Ajuste para PC: Que sea una ventanita flotante centrada */
+@media (min-width: 600px) {
+    .share-modal-overlay {
+        align-items: center; /* Centrado vertical */
+    }
+    .share-modal-content {
+        border-radius: 20px; /* Redondo entero */
+        transform: translateY(20px) scale(0.95); /* Efecto de entrada diferente */
+    }
+    .share-modal-overlay.active .share-modal-content {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* --- ELEMENTOS DEL MODAL --- */
+.share-modal-content h3 {
+    margin-bottom: 25px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px; right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+}
+
+/* La Rejilla de Iconos */
+.share-options-grid {
+    display: flex;
+    justify-content: center; /* Centrados */
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.share-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 8px;
+    transition: transform 0.2s;
+}
+
+.share-option:hover {
+    transform: translateY(-5px);
+}
+
+.share-icon-circle {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Feedback de copiado */
+.copy-feedback {
+    margin-top: 15px;
+    color: #25D366; /* Verde WhatsApp */
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.copy-feedback.show { opacity: 1; }
