@@ -62,17 +62,41 @@ body {
 h1 {
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     letter-spacing: -0.5px;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 p.subtitle {
-    font-size: 14px;
+    font-size: 16px;
     opacity: 0.9;
-    margin-bottom: 32px;
+    margin-bottom: 12px;
     font-weight: 400;
 }
+
+/* --- REDES SOCIALES --- */
+.social-icons {
+    /* margin-top: 20px; */
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.social-icons a {
+    color: rgba(255, 255, 255, 0.80); 
+    text-decoration: none;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: white;
+    transform: translateY(-3px);
+    opacity: 1;
+}
+
+
 
 /* --- BOTONES / ENLACES --- */
 .link-group {
@@ -80,9 +104,6 @@ p.subtitle {
     flex-direction: column;
     gap: 16px;
 }
-
-/* --- BOTONES / ENLACES --- */
-
 
 .link-btn {
     display: flex;
@@ -131,7 +152,7 @@ p.subtitle {
 /* Estilos base para el icono dentro del botón */
 .btn-icon {
     position: absolute; /*para poder alinearlo a la izda */
-    left: 20px; /* Misma distancia que el padding del botón para que se vea simétrico */
+    left: 10px; /* Misma distancia que el padding del botón para que se vea simétrico */
     width: 40px; /* Tamaño del círculo del icono */
     height: 40px;
     border-radius: 50%; /* Lo hace circular */
@@ -168,26 +189,6 @@ p.subtitle {
     background-color: #f0f0f0;
 }
 
-/* --- REDES SOCIALES --- */
-.social-icons {
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.social-icons a {
-    color: white;
-    text-decoration: none;
-    font-size: 24px;
-    transition: transform 0.2s;
-    opacity: 0.8;
-}
-
-.social-icons a:hover {
-    transform: scale(1.2);
-    opacity: 1;
-}
 
 /* --- ANIMACIÓN ENTRADA --- */
 @keyframes fadeIn {
@@ -280,4 +281,19 @@ p.subtitle {
 /* Rotar flecha */
 .expandable-wrapper.open .arrow-icon {
     transform: rotate(180deg);
+}
+
+/* --- FOOTER DE CIERRE --- */
+.footer-signature {
+    margin-top: 40px; /* Separación del último botón */
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.footer-signature p {
+    font-size: 12px;
+    letter-spacing: 1px; /* Espaciado elegante entre letras */
+    font-weight: 400;
+    text-transform: uppercase; /* Mayúsculas para parecer una firma de marca */
+    color: white;
 }
