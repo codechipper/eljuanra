@@ -1,6 +1,8 @@
-/* --- FONDO DE PANTALLA ALEATORIO --- */
-const backgroundDiv = document.querySelector('.background-image');
+/* --- FONDO DE PANTALLA: SISTEMA DOBLE CAPA (CROSS-FADE) --- */
+const bg1 = document.getElementById('bg1');
+const bg2 = document.getElementById('bg2');
 
+// Tu lista de imágenes
 const images = [
     'imgs/bosque.jpg',
     'imgs/guitarra.jpg',
@@ -15,23 +17,66 @@ const images = [
     'imgs/torcal.jpg'
 ];
 
+let shuffledImages = [];
 let currentIndex = 0;
+let currentLayer = 1; // 1 = bg1 visible, 2 = bg2 visible
 
-function changeBackground() {
-    let newIndex; // Obtener un índice aleatorio que no sea el actual
-    do {
-        newIndex = Math.floor(Math.random() * images.length);
-    } while (newIndex === currentIndex); // Asegurarse de que no repita la misma imagen
-
-    currentIndex = newIndex;
-    backgroundDiv.style.backgroundImage = `url('${images[currentIndex]}')`;
+// Función para barajar (Fisher-Yates)
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
-// Cambiar el fondo cada 5 segundos (5000 milisegundos)
-setInterval(changeBackground, 5000); 
+function changeBackground() {
+    // 1. Gestión del array aleatorio
+    if (shuffledImages.length === 0 || currentIndex >= shuffledImages.length) {
+        shuffledImages = [...images]; 
+        shuffleArray(shuffledImages);
+        // Evitar repetición inmediata
+        const currentUrl = (currentLayer === 1 ? bg1 : bg2).style.backgroundImage;
+        if (currentUrl.includes(shuffledImages[0])) {
+            shuffledImages.push(shuffledImages.shift());
+        }
+        currentIndex = 0;
+    }
 
-// Cargar el primer fondo al iniciar
+    const nextImageUrl = shuffledImages[currentIndex];
+
+    // 2. Determinar qué capa está oculta para cargar la foto ahí
+    const hiddenLayer = currentLayer === 1 ? bg2 : bg1;
+    const activeLayer = currentLayer === 1 ? bg1 : bg2;
+
+    // 3. PRECARGA EN CAPA OCULTA
+    const imgLoader = new Image();
+    imgLoader.src = nextImageUrl;
+
+    imgLoader.onload = () => {
+        // Ponemos la foto en la capa oculta
+        hiddenLayer.style.backgroundImage = `url('${nextImageUrl}')`;
+        
+        // Hacemos el Cross-Fade (Intercambio de opacidad)
+        activeLayer.classList.remove('active');
+        hiddenLayer.classList.add('active');
+        
+        // Cambiamos el puntero de capa actual
+        currentLayer = currentLayer === 1 ? 2 : 1;
+        currentIndex++;
+    };
+    
+    imgLoader.onerror = () => {
+        console.warn(`Error cargando: ${nextImageUrl}`);
+        currentIndex++; // Saltamos imagen corrupta
+    };
+}
+
+// Iniciar
+// Primero cargamos una imagen inicial inmediatamente
 changeBackground();
+
+// Luego el ciclo cada 8 segundos
+setInterval(changeBackground, 8000);
 
 
 // --- LÓGICA DE LOS ACORDEONES (Desplegables) ---
