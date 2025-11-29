@@ -185,7 +185,7 @@ p.subtitle {
     /* Un pequeño borde blanco para destacar */
     border: 1px solid rgba(0, 0, 0, 0.1); 
     /* Fondo de respaldo por si no carga la imagen */
-    background-color: #444; 
+    background-color: #eee; 
 }
 
 /* Imágenes específicas para cada botón */

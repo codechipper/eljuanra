@@ -109,49 +109,6 @@ accordions.forEach(acc => {
     });
 });
 
-// --- LÓGICA DE LA VENTANA MODAL DE COMPARTIR ---
-
-const shareBtn = document.getElementById('inlineShareBtn'); // El botón de arriba
-const modalOverlay = document.getElementById('shareModal');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const copyLinkOption = document.getElementById('copyLinkOption');
-const copyFeedback = document.getElementById('copyFeedback');
-
-// 1. ABRIR MODAL
-shareBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // Evita que el enlace haga nada raro
-    modalOverlay.classList.add('active');
-});
-
-// 2. CERRAR MODAL (Botón X)
-closeModalBtn.addEventListener('click', () => {
-    modalOverlay.classList.remove('active');
-});
-
-// 3. CERRAR AL HACER CLIC FUERA (En lo oscuro)
-modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) {
-        modalOverlay.classList.remove('active');
-    }
-});
-
-// 4. FUNCIÓN COPIAR ENLACE
-copyLinkOption.addEventListener('click', async () => {
-    try {
-        await navigator.clipboard.writeText(window.location.href);
-        
-        // Mostrar mensaje "Copiado"
-        copyFeedback.classList.add('show');
-        setTimeout(() => {
-            copyFeedback.classList.remove('show');
-            // Opcional: Cerrar modal automáticamente después de copiar
-            // modalOverlay.classList.remove('active');
-        }, 2000);
-        
-    } catch (err) {
-        console.error('Error while copying', err);
-    }
-});
 
 // --- PROTECCIÓN DE EMAIL (Anti-Scraping) ---
 const mailBtn = document.getElementById('secure-mail');
@@ -173,3 +130,112 @@ mailBtn.addEventListener('click', (e) => {
 mailBtn.addEventListener('mouseenter', () => {
     mailBtn.href = `mailto:${user}@${dn}.${tld}`;
 });
+
+/* --- LÓGICA DE LA VENTANA MODAL DE COMPARTIR --- */
+
+const shareBtn = document.getElementById('inlineShareBtn');
+const modalOverlay = document.getElementById('shareModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const copyLinkOption = document.getElementById('copyLinkOption');
+const copyFeedback = document.getElementById('copyFeedback');
+const shareViaEmailBtn = document.getElementById('shareViaEmail');
+
+
+// 1. ABRIR MODAL
+if (shareBtn) {
+    shareBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalOverlay.classList.add('active');
+    });
+}
+
+// 2. CERRAR MODAL
+//    en el botón de cierre (X)
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+        modalOverlay.classList.remove('active');
+    });
+}
+//   pinchar fuera de la ventana (en lo oscuro)
+if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            modalOverlay.classList.remove('active');
+        }
+    });
+}
+
+// 3. LÓGICA DEL BOTÓN EMAIL
+if (shareViaEmailBtn) {
+    shareViaEmailBtn.addEventListener('click', (e) => {
+        // A. IMPORTANTE: Frenamos el comportamiento normal del enlace
+        e.preventDefault();
+        
+        // B. Calculamos los datos al momento del clic
+        const currentUrl = window.location.href;
+        const subject = "Check out this profile!";
+        const body = `Here is the contact profile for Juanra: ${currentUrl}`;
+        
+        const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        // C. FORZAMOS LA VENTANA NUEVA con JS
+        window.open(mailtoUrl, '_blank');
+    });
+}
+
+// 4. FUNCIÓN COPIAR ENLACE (BLINDADA PARA REMOTO)
+if (copyLinkOption) {
+    copyLinkOption.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const url = window.location.href;
+
+        // Intentamos primero la forma moderna
+        if (navigator.clipboard && window.isSecureContext) {
+            try {
+                await navigator.clipboard.writeText(url);
+                showCopyFeedback();
+            } catch (err) {
+                // Si falla, vamos al Plan B
+                fallbackCopyTextToClipboard(url);
+            }
+        } else {
+            // Si no hay API moderna, vamos directo al Plan B
+            fallbackCopyTextToClipboard(url);
+        }
+    });
+}
+
+// --- PLAN B: COPIAR A LA ANTIGUA ---
+function fallbackCopyTextToClipboard(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    
+    // Lo hacemos invisible pero presente
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    textArea.style.top = "0";
+    document.body.appendChild(textArea);
+    
+    textArea.focus();
+    textArea.select();
+
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) showCopyFeedback();
+    } catch (err) {
+        console.error('No se pudo copiar', err);
+        alert('Please copy the URL manually from the address bar.');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// Mostrar mensaje verde "Link Copied!"
+function showCopyFeedback() {
+    if (copyFeedback) {
+        copyFeedback.classList.add('show');
+        setTimeout(() => {
+            copyFeedback.classList.remove('show');
+        }, 2000);
+    }
+}
