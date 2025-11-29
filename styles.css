@@ -99,6 +99,14 @@ p.subtitle {
 
 
 /* --- BOTONES / ENLACES --- */
+.weblink {
+    color: inherit;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.weblink i { margin-left: 5px; }
+
 .link-group {
     display: flex;
     flex-direction: column;
@@ -168,7 +176,7 @@ p.subtitle {
 
 /* Imágenes específicas para cada botón */
 .btn-icon.erasmus {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png');
+    background-image: url('imgs/logo_erasmus_fuengirola_cuadrado.png');
 }
 
 .btn-icon.teacher {
@@ -181,7 +189,7 @@ p.subtitle {
 }
 
 .btn-icon.fn1    {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1024px-YouTube_full-color_icon_%282017%29.svg.png');
+    background-image: url('imgs/logo_IES_cabeza_colorines.png');
 }
 
 .btn-icon.contact {
