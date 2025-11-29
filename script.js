@@ -4,10 +4,15 @@ const backgroundDiv = document.querySelector('.background-image');
 const images = [
     'imgs/bosque.jpg',
     'imgs/guitarra.jpg',
+    'imgs/comida.jpg',
+    'imgs/escaleras.jpg',
+    'imgs/libro.jpg',
+    'imgs/mijas.jpg',
+    'imgs/mar.jpg',
     'imgs/kandinsky.jpg',
     'imgs/guitarrica.jpg',
     'imgs/teatro.jpg',
-    'imgs/dorre2.jpg'
+    'imgs/torcal.jpg'
 ];
 
 let currentIndex = 0;

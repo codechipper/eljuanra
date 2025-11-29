@@ -179,22 +179,16 @@ p.subtitle {
     background-image: url('imgs/logo_erasmus_fuengirola_cuadrado.png');
 }
 
-.btn-icon.teacher {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1024px-YouTube_full-color_icon_%282017%29.svg.png');
-}
-
-.btn-icon.hobbies {
-    background-image: url('https://www.iconfinder.com/icons/7309628/beatport_icon'); /* Icono de Beatport (buscar uno mejor) */
-    background-color: #00d283; /* Color si no hay imagen */
+.btn-icon.whoisthis {
+    background-image: url('imgs/guitarrica.jpg');
 }
 
 .btn-icon.fn1    {
     background-image: url('imgs/logo_IES_cabeza_colorines.png');
 }
 
-.btn-icon.contact {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/3588/3588383.png'); /* Icono de email/contacto */
-    background-color: #f0f0f0;
+.btn-icon.whatsapp {
+    background-image: url('imgs/comida2.jpg'); /* Icono de email/contacto */
 }
 
 
@@ -293,19 +287,25 @@ p.subtitle {
 
 /* --- FOOTER DE CIERRE --- */
 .footer-signature {
-    margin-top: 40px; /* Separación del último botón */
-    margin-bottom: 20px;
-    opacity: 0.7;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+    opacity: 0.8;           
+    transition: all 0.3s ease;
 }
 
-.footer-signature p {
-    font-size: 12px;
-    letter-spacing: 1px; /* Espaciado elegante entre letras */
-    font-weight: 400;
-    text-transform: uppercase; /* Mayúsculas para parecer una firma de marca */
-    color: white;
+.footer-signature:hover {
+    opacity: 1;             
+    transform: scale(1.05);
 }
 
+.signature-img {
+    height: 60px;  /* Ajusta este valor según lo grande que sea tu trazo */
+    width: auto;   /* Mantiene la proporción para que no se deforme */
+    
+    /* Sombra suave para que destaque si el fondo justo ahí es claro */
+    filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.5));
+}
 
 /* --- MODAL DE COMPARTIR (Overlay Oscuro) --- */
 .share-modal-overlay {
